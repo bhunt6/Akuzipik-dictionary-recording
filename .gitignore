@@ -1,0 +1,6 @@
+#ignore text files
+nouns.txt
+bases.js
+nouns.js
+buttonSearch.js
+output.html

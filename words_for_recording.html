@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+    <script type="text/javascript" src="bases072124.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body class="body">
+    <div class="buttons">
+        <button type="button" value="Back" id="backButton">Back</button>
+        <button type="button" value="Next" id="nextButton">Next</button>
+    </div>
+    <div id="output">Recording Nouns</div>
+    <script>
+        function getWords(){
+            const words = LEX.filter((word) => 
+                word.source_pos == "noun" &&
+                word.examples.some(example => example !== "") 
+            );
+            console.log(words);
+            
+            display(words);
+        }
+
+        var displayWords = []
+        
+        function display(words){
+            //change value of element and upper limit to define range of words to display
+            for(element = 0; element < words.length; element++){
+                displayWords[element] = `<div class="id">${words[element].UUID}</div>
+                <div class="word">${element+1}. ${words[element].headword}</div>
+                <div class="gloss">${words[element].gloss}</div>`
+
+                words[element].examples.forEach(example => {
+                    displayWords[element] += `<div class="example">${example}\n</div>`
+                });
+            };
+        }
+        getWords();
+
+        var output = document.getElementById("output");
+
+        var i = 0;
+
+        const next = document.getElementById("nextButton");
+        const back = document.getElementById("backButton");
+
+        back.disabled = true;
+
+        function nextBtn() {
+            console.clear()
+            if (i >= 0 && i < displayWords.length) {
+                output.innerHTML = displayWords[i]
+                back.disabled = false
+                console.log("next button array index set:" + i)
+                i++
+            } else {
+                output.innerHTML = displayWords[i]
+                next.disabled = true
+                console.log("next button array index set:" + i)
+                i++
+            }
+        }
+
+        function prevBtn() {
+            if (i === 0) {
+                i = displayWords.length;
+            }
+            --i;
+            console.clear()
+            console.log("prev array index:" + i)
+            if (i <= displayWords.length && i > 0) {
+                output.innerHTML = displayWords[i]
+                next.disabled = false
+            } else {
+                output.innerHTML = displayWords[i]
+                back.disabled = true
+            }
+        }
+
+        next.addEventListener("click", function() {
+            nextBtn();
+        });
+
+        back.addEventListener("click", function() {
+            prevBtn();
+        });
+
+        document.addEventListener("keyup", (e) => {
+            if (e.keyCode == 13) {
+                e.preventDefault();
+                document.getElementById("nextButton").click();
+            }
+        });
+
+        document.addEventListener("keyup", (e) => {
+            if (e.keyCode == 8) {
+                e.preventDefault();
+                document.getElementById("backButton").click();
+            }
+        });
+    </script>
+</body>
+</html>

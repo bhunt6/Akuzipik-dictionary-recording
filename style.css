@@ -1,0 +1,51 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+button{
+    height: 4rem;
+    width: 50%;
+    text-align: center;
+    margin: 0 1rem 0 1rem;
+}
+.id{
+    margin-top: 4rem;
+    font-style: italic;
+}
+
+.word{
+    font-weight: bold;
+    font-size: 40pt;
+}
+
+.gloss{
+    font-size: 20pt;
+    font-style: italic;
+}
+.example{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-top: 2rem;
+    font-size: 40pt;
+}
+
+.yupik_ex{
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.english_ex{
+    font-style: italic;
+    margin-bottom: 2rem;
+}
